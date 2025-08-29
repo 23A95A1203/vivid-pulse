@@ -1,5 +1,5 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
     // The state from react-redux is not available in this environment.
@@ -29,7 +29,8 @@ const Navbar = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                {/* The nav links are now visible */}
+                <div className="navbar-collapse md:flex" id="navbarSupportedContent">
                     <ul className="navbar-nav m-auto my-2 text-center">
                         <li className="nav-item">
                             <NavLink className="nav-link fs-5" to="/">Home</NavLink>
