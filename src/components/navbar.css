@@ -1,0 +1,81 @@
+/* Navbar Styling */
+.navbar {
+  background-color: #f8f9fa; /* bg-light */
+  padding-top: 0.5rem; /* py-2 */
+  padding-bottom: 0.5rem; /* py-2 */
+  position: sticky; /* sticky-top */
+  top: 0; /* sticky-top */
+  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075); /* shadow-sm */
+}
+
+/* Container to center content */
+.navbar .container {
+  max-width: 1140px; /* Example max-width for a fixed container */
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Navbar Brand (Logo) */
+.navbar-brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  height: 2.5rem; /* h-10 */
+  width: auto;
+  object-fit: contain;
+}
+
+/* Navbar Toggler for mobile */
+.navbar-toggler {
+  padding: 0.25rem 0.75rem;
+  font-size: 1.25rem;
+  line-height: 1;
+  background-color: transparent;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 0.25rem;
+}
+
+/* Navbar Nav links */
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  margin: auto;
+  padding: 0;
+}
+
+.navbar-nav .nav-item {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.nav-link {
+  color: #212529; /* text-dark */
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+}
+
+/* Login, Register, Cart Buttons */
+.buttons .btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #212529; /* btn-outline-dark */
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #212529; /* btn-outline-dark */
+  padding: 0.375rem 0.75rem;
+  margin: 0.5rem;
+  border-radius: 0.25rem;
+  transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.buttons .btn:hover {
+  color: #fff;
+  background-color: #212529;
+}
