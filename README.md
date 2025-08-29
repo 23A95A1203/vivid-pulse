@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 Vivid Pulse E-Commerce Website
 Vivid Pulse is a data-driven e-commerce platform designed to anticipate and deliver the latest fashion trends, providing customers with a seamless and personalized shopping experience.
 
@@ -56,4 +56,4 @@ GitHub: https://github.com/23A95A1203
 =======
 # vivid-pulse
 A data-driven e-commerce platform designed to anticipate and deliver the latest fashion trends, providing customers with a seamless and personalized shopping experience.
->>>>>>> 98590ca9175b7672a4331c9cc97716fef77dc8e5
+
