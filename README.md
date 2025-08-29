@@ -1,67 +1,54 @@
-# E-Commerce Website
+Vivid Pulse E-Commerce Website
+Vivid Pulse is a data-driven e-commerce platform designed to anticipate and deliver the latest fashion trends, providing customers with a seamless and personalized shopping experience.
 
-A Ecommerce Website made with React.js Framework.
+Demo
+https://vivid-pulse.vercel.app/
 
+Features
+Fully Responsive Design with Tailwind CSS
 
-## Demo
+Real-time Authentication with Firebase
 
-https://reactjs-ecommerce-app.vercel.app/
+User Profile Creation
 
-## Features
+Data-driven Product Catalog
 
-- Easy to integrate with Backend
-- Fully Responsive
-
-
-## Screenshots
-
-![App Screenshot](https://i.ibb.co/fQ293tm/image.png)
-
-
-
-## Run Locally
-
+Run Locally
 Clone the project
 
-```bash
-  git clone https://github.com/ssahibsingh/React_E-Commerce
-```
+git clone [https://github.com/23A95A1203/vivid-pulse](https://github.com/23A95A1203/vivid-pulse)
 
 Go to the project directory
 
-```bash
-  cd React_E-Commerce
-```
+cd Vivid-Pulse-E-Commerce
 
 Install dependencies
 
-```bash
-  npm install
-```
+npm install
 
 Start the server
 
-```bash
-  npm start
-```
+npm start
 
+Tech Stack
+React
 
+React Router
 
-## Tech Stack
+Firebase
 
-* [React](https://reactjs.org/)
-* [Redux](https://redux.js.org/)
-* [Bootstrap](https://getbootstrap.com/)
-* [Fake Store API](https://fakestoreapi.com/)
+Tailwind CSS
 
-## Contributing
+Fake Store API
 
+Contributing
 Contributions are always welcome!
 Just raise an issue, we will discuss it.
 
+Feedback
+If you have any feedback, please reach out to me here
 
-## Feedback
+Project By
+RAVITEJA
 
-If you have any feedback, please reach out to me [here](https://ssahibsingh.github.io/#contact)
-
-
+GitHub: https://github.com/23A95A1203
