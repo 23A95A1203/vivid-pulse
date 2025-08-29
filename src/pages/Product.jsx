@@ -1,146 +1,139 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { addCart } from "../redux/action";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Product = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState({});
-  const [similarProducts, setSimilarProducts] = useState([]);
+const Products = () => {
+  const [data, setData] = useState([]);
+  const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const addProduct = (product) => {
+    dispatch(addCart(product))
+  }
 
   useEffect(() => {
-    const getProduct = async () => {
+    let isMounted = true;
+    const getProducts = async () => {
       setLoading(true);
-      try {
-        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-        const data = await response.json();
-        setProduct(data);
+      const response = await fetch("https://fakestoreapi.com/products/");
+      const productsData = await response.clone().json();
 
-        const response2 = await fetch(`https://fakestoreapi.com/products/category/${data.category}`);
-        const data2 = await response2.json();
-        setSimilarProducts(data2);
-      } catch (error) {
-        console.error("Failed to fetch product data:", error);
-      } finally {
+      if (isMounted) {
+        setData(productsData);
+        setFilter(productsData);
         setLoading(false);
       }
     };
-    getProduct();
-  }, [id]);
+
+    getProducts();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const Loading = () => {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          <div className="flex-1">
-            <Skeleton height={400} />
-          </div>
-          <div className="flex-1 space-y-4">
-            <Skeleton height={30} width={250} />
-            <Skeleton height={90} />
-            <Skeleton height={40} width={70} />
-            <Skeleton height={50} width={110} />
-            <Skeleton height={120} />
-            <div className="flex space-x-4">
-              <Skeleton height={40} width={110} />
-              <Skeleton height={40} width={110} />
-            </div>
-          </div>
+      <>
+        <div className="col-12 py-5 text-center">
+          <Skeleton height={40} width={560} />
         </div>
-      </div>
+        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+          <Skeleton height={592} />
+        </div>
+        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+          <Skeleton height={592} />
+        </div>
+        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+          <Skeleton height={592} />
+        </div>
+        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+          <Skeleton height={592} />
+        </div>
+        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+          <Skeleton height={592} />
+        </div>
+        <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+          <Skeleton height={592} />
+        </div>
+      </>
     );
   };
 
-  const ShowProduct = () => {
-    const priceInRupees = (product.price * 85).toLocaleString('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
+  const filterProduct = (cat) => {
+    const updatedList = data.filter((item) => item.category === cat);
+    setFilter(updatedList);
+  }
 
+  const ShowProducts = () => {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8 items-center lg:items-start">
-          <div className="flex-1 w-full lg:w-1/2">
-            <img
-              className="w-full h-auto object-contain rounded-lg shadow-lg"
-              src={product.image}
-              alt={product.title}
-            />
-          </div>
-          <div className="flex-1 w-full lg:w-1/2 space-y-4">
-            <h4 className="text-sm font-semibold text-gray-500 uppercase">{product.category}</h4>
-            <h1 className="text-4xl font-bold text-gray-900">{product.title}</h1>
-            <div className="flex items-center space-x-2 text-yellow-500">
-              <span className="text-xl font-bold">{product.rating && product.rating.rate}</span>
-              <i className="fa fa-star"></i>
-              <span className="text-gray-500 text-sm">({product.rating && product.rating.count} reviews)</span>
-            </div>
-            <h3 className="text-3xl font-bold text-gray-900">{priceInRupees}</h3>
-            <p className="text-gray-700 leading-relaxed">{product.description}</p>
-            <div className="flex space-x-4 mt-8">
-              <button
-                className="bg-gray-900 text-white font-semibold py-3 px-6 rounded-full transition-colors duration-200 hover:bg-gray-700"
-                onClick={() => console.log("Added to Cart:", product)}
-              >
-                Add to Cart
-              </button>
-              <Link to="/cart" className="bg-white text-gray-900 font-semibold py-3 px-6 rounded-full border-2 border-gray-900 transition-colors duration-200 hover:bg-gray-900 hover:text-white">
-                Go to Cart
-              </Link>
-            </div>
-          </div>
+      <>
+        <div className="buttons text-center py-5">
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => setFilter(data)}>All</button>
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("men's clothing")}>Men's Clothing</button>
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("women's clothing")}>
+            Women's Clothing
+          </button>
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("jewelery")}>Jewelery</button>
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("electronics")}>Electronics</button>
         </div>
-      </div>
-    );
-  };
 
-  const ShowSimilarProduct = () => {
-    return (
-      <div className="my-8">
-        <h2 className="text-3xl font-bold text-center mb-8">You may also Like</h2>
-        <div className="flex space-x-6 overflow-x-auto p-4 scrollbar-hide">
-          {similarProducts.map((item) => {
-            const priceInRupees = (item.price * 85).toLocaleString('en-IN', {
-              style: 'currency',
-              currency: 'INR',
-              minimumFractionDigits: 0,
-              maximumFractionDigits: 0,
-            });
-            
-            return (
-              <div key={item.id} className="flex-none w-64 bg-white rounded-xl shadow-lg overflow-hidden transform transition-transform duration-300 hover:scale-105">
-                <Link to={`/product/${item.id}`} onClick={() => window.scrollTo(0, 0)}>
-                  <div className="relative h-64 p-4">
-                    <img
-                      className="w-full h-full object-contain"
-                      src={item.image}
-                      alt={item.title}
-                    />
-                  </div>
-                  <div className="p-4 text-center">
-                    <h5 className="text-lg font-semibold overflow-hidden overflow-ellipsis whitespace-nowrap">{item.title}</h5>
-                    <div className="text-xl font-bold mt-2">{priceInRupees}</div>
-                  </div>
-                </Link>
+        {filter.map((product) => {
+          return (
+            <div id={product.id} key={product.id} className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+              <div className="card text-center h-100" key={product.id}>
+                <img
+                  className="card-img-top p-3"
+                  src={product.image}
+                  alt="Card"
+                  height={300}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">
+                    {product.title.substring(0, 12)}...
+                  </h5>
+                  <p className="card-text">
+                    {product.description.substring(0, 90)}...
+                  </p>
+                </div>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item lead">$ {product.price}</li>
+                </ul>
+                <div className="card-body">
+                  <Link to={"/product/" + product.id} className="btn btn-dark m-1">
+                    Buy Now
+                  </Link>
+                  <button className="btn btn-dark m-1" onClick={() => addProduct(product)}>
+                    Add to Cart
+                  </button>
+                </div>
               </div>
-            );
-          })}
-        </div>
-      </div>
+            </div>
+          );
+        })}
+      </>
     );
   };
 
   return (
     <>
-      <div className="bg-gray-50 min-h-screen">
-        {loading ? <Loading /> : <ShowProduct />}
-        {!loading && <ShowSimilarProduct />}
+      <div className="container my-3 py-3">
+        <div className="row">
+          <div className="col-12">
+            <h2 className="display-5 text-center">Latest Products</h2>
+            <hr />
+          </div>
+        </div>
+        <div className="row justify-content-center">
+          {loading ? <Loading /> : <ShowProducts />}
+        </div>
       </div>
     </>
   );
 };
 
-export default Product;
+export default Products;
